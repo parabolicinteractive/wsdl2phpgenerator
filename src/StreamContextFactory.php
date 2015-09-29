@@ -50,8 +50,9 @@ class StreamContextFactory
             $options['http']['header'] = $headers;
         }
 
-		if(isset($soapOptions['ssl']))
-			$options['ssl'] = $soapOptions;
+		// If we already created a stream context, make sure we use the same options.
+		if(isset($soapOptions['stream_context']))
+			$options = array_merge($options, stream_context_get_options($soapOptions['stream_context']));
 
         return stream_context_create($options);
     }
