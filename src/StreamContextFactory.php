@@ -50,6 +50,9 @@ class StreamContextFactory
             $options['http']['header'] = $headers;
         }
 
+		if(isset($soapOptions['ssl']))
+			$options['ssl'] = $soapOptions;
+
         return stream_context_create($options);
     }
 }
